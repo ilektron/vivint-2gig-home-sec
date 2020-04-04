@@ -2,33 +2,102 @@
 Repository for re-using vivint equipment
 # Re-using vivint equipment
 ## Introduction
-My recently bought house has a vivint doorbell (DBC2-43536D ), an IP camera (721W-46813F), and several 2Gig connected sensors. As the battery was failing of the vivint head-unit, and it complained about the lack of subscription, I disconnected it for now.
 
-I am pretty much an enthusiastic noob. I document below my successfull endeavours. Much of it will need further iterations and improvements overtime. Comments/tips are welcome.
-### Doorbell
+Vivint provides decent hardware that is more often than not locked into their proprietary ecosystem. Here you will find information that outlines how to use vivint equipment with different services
+
+## Doorbell Camera
+
 When you have a vivint doorbell and disconnect the vivint head-unit, you will no longer hear it "chime" when somebody presses the doorbell. This was a problem for me so I started exploring how to intercept the chime "event" at the doorbell in order to make a speaker inside "chime".
-## Vivotek
-### General
-The vivint doorbell (DBC2-43536D), an IP camera (721W-46813F) are rebranded vivotek equipment.
-1. The doorbell and the IP camera can be forced into WPS mode. Alternativelly, they can be forced into AP mode. Either way, you can connect them to your own WLAN in case they weren't already.
 
-2. Subsequently, you can enable "telnet" as follows: "http://<IP-address of vivotek device>/cgi-bin/admin/mod_inetd.cgi?telnet=on".
-  
-3. The password of the "root" user is available on the web: "adcvideo". You can now telnet into your vivotek device. Telnet is not a safe protocol, but it appear to be the only way a shell can be started on the vivotek device. 
-### Doorbell
+## Vivotek Cameras
+
+### General
+
+Many of the older Vivint cameras are rebranded Vivotek devices, including Vivint's doorbell camera.
+
+### List of Devices
+
+* Vivint Doorbell Camera (DBC2-43536D)
+* Vivint Outdoor Camera v1 (HD300W) - Discontinued
+* Vivint Outdoor Camera v2 (HD400W or IB8363-W) - Discontinued
+* Vivotek IP Camera (ADC-V520IR or IP8131W) - Discontinued
+*
+
+The Vivotek cameras can be connected to your wifi via WPS or by using the camera's AP mode.
+
+The cameras run busybox, which is a stripped down implementation of linux. Many of utilities do not provide full functionality in order to create a low memory and fast operating system for embedded devices. Many of the commands are actually compiled into a single binary that uses aliases in order to invoke different functionality.
+
+The cameras use a simple `getparam` and `setparam` API that changes config files in /etc/. If you enable telnet, you modify the files directly with `vi`
+
+#### Resetting your camera
+
+Reset the camera by holding down the WPS button for 30 seconds. The status LED should blink red/green before releasing the button.
+
+#### Enabling Access Point Mode
+
+To enable access point mode on your camera, simple hold down the available button on the camera for 30 seconds to reset the camera. When the camera reboots, it will be in access point mode and will provide a WiFi network without encryption
+
+#### Enabling Telnet
+
+Enabling telnet can be done by simply using the camera's API by accessing the following URL with your browser or HTTP request tool of your choice
+
+    http://root:adcvideo@{ip_of_camera}/cgi-bin/admin/mod_inetd.cgi?telnet=on
+
+If you are prompted for a username and password, use `root` and `adcvideo` respectively
+
+Once telnet is enable, you can connect directly to the cameras by using the command
+
+  telnet {ip_of_camera}
+
+  Most of the configuration can be found in the /etc/conf.d/ folder in XML
+
+### Doorbell Camera (DBC2-43536D)
+
+LED Status:
+
+TODO Insert table of LED status for the doorbell camera
+
+#### Doorbell Chime
 My doorbell runs linux with busybox. Busybox is a low resource, stripped-down implementation and its commands do not seem to support all the options. It is stripped down as I failed to find e.g. an ssh-deamon.
-  
+
 1. When the doorbell is pressed, the the script "play_sound" is invoked by "chronos", with the argunement "/etc/audio/bell.wav" (in my case).
 
-2. The "play_sound" script is stored on a read-only portion of its storage (it might be possible to mount this storagte in "rw" mode, but I didnt explore this). 
+2. The "play_sound" script is stored on a read-only portion of its storage (it might be possible to mount this storagte in "rw" mode, but I didnt explore this).
 
-3. The "play_sound" script invokes "nice". I managed to "override" "nice". I managed to detect when "nice" is invoked for playing "/etc/audio/bell.wav" and when it is invoked for playing some other "audio" file. I managed to "ssh" into my Raspbery Pi (with speaker attached) when "nice" was invoked for playing "/etc/audio/bell.wav".
-  
-Further details wil follow.
-### IP camera
-TBD
-## 2Gig
-TBD
+3. The "play_sound" script invokes "nice". I managed to "override" "nice". I managed to detect when "nice" is invoked for playing "/etc/audio/bell.wav" and when it is invoked for playing some other "audio" file. Using "ssh", you could for example connect to a Raspbery Pi (with speaker attached) when "nice" was invoked for playing "/etc/audio/bell.wav".
+
+### Vivint Outdoor Camera (HD300W or HD400W) - Discontinued
+
+These cameras are no longer installed at new locations and have been replaced by the new Vivint Outdoor Camera, which is probably the Ping camera that has been repackaged
+
+LED Status:
+- Yellow Solid -> System Starting
+- Green Solid -> Connected to Vivint panel
+- Red Flashing -> Unable to connect to Vivint Panel
+- Flashing Yellow -> WPS enabled
+- Green/Blue Flashing -> AP mode enabled
+- Red/Green Flashing -> Processing button press or resetting camera
+
+### Vivint IP Camera (ADC-V520IR or IP8136W) - Discontinued
+
+#### Specifications
+
+* 1-Megapixel CMOS Sensor
+* Compact Design
+* Real-time H.264 and MJPEG Compression (Dual Codec)
+* 30 fps @ 1280x800
+* Two-way Audio
+* Removable IR-cut Filter for Day and Night Function
+* Built-in IR Illuminators, Effective up to 6 Meters
+* Built-in MicroSD/SDHC Card Slot for On-board Storage
+* Built-in IEEE 802.11b/g/n WLAN
+* Wi-Fi Protected Setup (WPS) for Easy and Secure Wireless Network Connection
+
+## Ping Family of Cameras
+
+The newer Vivint cameras use NIPCA, which stands for [Network IP Camera Application.](http://gurau-audibert.hd.free.fr/josdblog/wp-content/uploads/2013/09/CGI_2121.pdf). Some D-Link WiFi cameras also use NIPCA. NIPCA seems to be closed source. The Ping cameras do use some end points that don't seem to be included in the NIPCA standard. Any endpoints discovered that aren't listed in the NIPCA documentation will be documented below
+
+### Vivint Ping
 
 
-
+:
