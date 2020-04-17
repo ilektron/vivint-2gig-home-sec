@@ -14,13 +14,12 @@ Vivint provides decent hardware that is more often than not locked into their pr
 
 Many of the older Vivint cameras are rebranded Vivotek devices, including Vivint's doorbell camera.
 
-### List of Devices
+### List of Vivotek Devices
 
 * Vivint Doorbell Camera (DBC2-43536D)
 * Vivint Outdoor Camera v1 (HD300W) - Discontinued
 * Vivint Outdoor Camera v2 (HD400W or IB8363-W) - Discontinued
 * Vivotek IP Camera (ADC-V520IR or IP8131W) - Discontinued
-*
 
 The Vivotek cameras can be connected to your wifi via WPS or by using the camera's AP mode.
 
@@ -66,13 +65,15 @@ The doorbell runs linux with busybox. Busybox is a low resource, stripped-down i
 
 1. When the doorbell is pressed, the script `play_sound` is invoked by `chronos`, with the argument `/etc/audio/bell.wav` (in my case).
 
-2. The `play_sound` script is stored on a read-only portion of its storage. 
+2. The `play_sound` script is stored on a read-only portion of its storage.
 
 3. The `play_sound` script invokes `nice`. I managed to `override` `nice`. You can detect when `nice` is invoked for playing `/etc/audio/bell.wav` and when it is invoked for playing some other `audio` file. Using `ssh`, you could for example connect to a Raspbery Pi (with speaker attached) when `nice` was invoked for playing `/etc/audio/bell.wav`.
 
 ### Vivint Outdoor Camera (HD300W or HD400W) - Discontinued
 
 Outdoor Camera v1
+
+![](https://github.com/ilektron/vivint-2gig-home-sec/blob/master/images/outdoor_camera_v1.jpg?raw=true)
 
 Outdoor Camera v2
 
@@ -89,6 +90,8 @@ LED Status:
 - Red/Green Flashing -> Processing button press or resetting camera
 
 ### Vivint IP Camera (ADC-V520IR or IP8136W) - Discontinued
+
+![](https://github.com/ilektron/vivint-2gig-home-sec/blob/master/images/ip8136w.jpg?raw=true)
 
 #### Specifications
 
@@ -108,6 +111,8 @@ LED Status:
 The newer Vivint cameras use NIPCA, which stands for [Network IP Camera Application.](http://gurau-audibert.hd.free.fr/josdblog/wp-content/uploads/2013/09/CGI_2121.pdf). Some D-Link WiFi cameras also use NIPCA. NIPCA seems to be closed source. The Ping cameras do use some end points that don't seem to be included in the NIPCA standard. Any endpoints discovered that aren't listed in the NIPCA documentation will be documented below
 
 ### Vivint Ping
+
+![](https://github.com/ilektron/vivint-2gig-home-sec/blob/master/images/ping_camera.jpg?raw=true)
 
 #### Enabling telnet
 
