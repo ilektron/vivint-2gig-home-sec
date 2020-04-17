@@ -7,7 +7,6 @@ Vivint provides decent hardware that is more often than not locked into their pr
 
 ## Doorbell Camera
 
-When you have a vivint doorbell and disconnect the vivint head-unit, you will no longer hear it "chime" when somebody presses the doorbell. This was a problem for me so I started exploring how to intercept the chime "event" at the doorbell in order to make a speaker inside "chime".
 
 ## Vivotek Cameras
 
@@ -53,18 +52,23 @@ Once telnet is enable, you can connect directly to the cameras by using the comm
 
 ### Doorbell Camera (DBC2-43536D)
 
+![](https://www.vivint.com/sites/default/files/styles/small_hq/public/image/2020-03/Scareawayporchpiratespov.webp?itok=SkzEJVTL)
+
 LED Status:
 
 TODO Insert table of LED status for the doorbell camera
 
 #### Doorbell Chime
-My doorbell runs linux with busybox. Busybox is a low resource, stripped-down implementation and its commands do not seem to support all the options. It is stripped down as I failed to find e.g. an ssh-deamon.
 
-1. When the doorbell is pressed, the the script "play_sound" is invoked by "chronos", with the argunement "/etc/audio/bell.wav" (in my case).
+When you have a vivint doorbell and disconnect the vivint head-unit, you will no longer hear it "chime" when somebody presses the doorbell. This was a problem for me so I started exploring how to intercept the chime "event" at the doorbell in order to make a speaker inside "chime".
 
-2. The "play_sound" script is stored on a read-only portion of its storage (it might be possible to mount this storagte in "rw" mode, but I didnt explore this).
+The doorbell runs linux with busybox. Busybox is a low resource, stripped-down implementation and its commands do not seem to support all the options.
 
-3. The "play_sound" script invokes "nice". I managed to "override" "nice". I managed to detect when "nice" is invoked for playing "/etc/audio/bell.wav" and when it is invoked for playing some other "audio" file. Using "ssh", you could for example connect to a Raspbery Pi (with speaker attached) when "nice" was invoked for playing "/etc/audio/bell.wav".
+1. When the doorbell is pressed, the script `play_sound` is invoked by `chronos`, with the argument `/etc/audio/bell.wav` (in my case).
+
+2. The `play_sound` script is stored on a read-only portion of its storage. 
+
+3. The `play_sound` script invokes `nice`. I managed to `override` `nice`. You can detect when `nice` is invoked for playing `/etc/audio/bell.wav` and when it is invoked for playing some other `audio` file. Using `ssh`, you could for example connect to a Raspbery Pi (with speaker attached) when `nice` was invoked for playing `/etc/audio/bell.wav`.
 
 ### Vivint Outdoor Camera (HD300W or HD400W) - Discontinued
 
