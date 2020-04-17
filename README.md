@@ -72,6 +72,12 @@ The doorbell runs linux with busybox. Busybox is a low resource, stripped-down i
 
 ### Vivint Outdoor Camera (HD300W or HD400W) - Discontinued
 
+Outdoor Camera v1
+
+Outdoor Camera v2
+
+![](https://github.com/ilektron/vivint-2gig-home-sec/blob/master/images/outdoor_camera_v2.jpg?raw=true)
+
 These cameras are no longer installed at new locations and have been replaced by the new Vivint Outdoor Camera, which is probably the Ping camera that has been repackaged
 
 LED Status:
