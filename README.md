@@ -3,10 +3,7 @@ Repository for re-using vivint equipment
 # Re-using vivint equipment
 ## Introduction
 
-Vivint provides decent hardware that is more often than not locked into their proprietary ecosystem. Here you will find information that outlines how to use vivint equipment with different services
-
-## Doorbell Camera
-
+Vivint provides decent hardware that is more often than not locked into their proprietary ecosystem. Here you will find information that outlines how to use Vivint equipment with different services
 
 ## Vivotek Cameras
 
@@ -25,7 +22,7 @@ The Vivotek cameras can be connected to your wifi via WPS or by using the camera
 
 The cameras run busybox, which is a stripped down implementation of linux. Many of utilities do not provide full functionality in order to create a low memory and fast operating system for embedded devices. Many of the commands are actually compiled into a single binary that uses aliases in order to invoke different functionality.
 
-The cameras use a simple `getparam` and `setparam` API that changes config files in /etc/. If you enable telnet, you modify the files directly with `vi`
+The cameras use a simple `getparam` and `setparam` API that changes config files in `/etc/`. If you enable telnet, you modify the files directly with `vi`
 
 #### Resetting your camera
 
@@ -39,15 +36,19 @@ To enable access point mode on your camera, simple hold down the available butto
 
 Enabling telnet can be done by simply using the camera's API by accessing the following URL with your browser or HTTP request tool of your choice
 
-    http://root:adcvideo@{ip_of_camera}/cgi-bin/admin/mod_inetd.cgi?telnet=on
+```
+http://root:adcvideo@{ip_of_camera}/cgi-bin/admin/mod_inetd.cgi?telnet=on
+```
 
 If you are prompted for a username and password, use `root` and `adcvideo` respectively
 
 Once telnet is enable, you can connect directly to the cameras by using the command
 
-  telnet {ip_of_camera}
+```
+$ telnet {ip_of_camera}
+```
 
-  Most of the configuration can be found in the /etc/conf.d/ folder in XML
+Most of the configuration can be found in the `/etc/conf.d/` folder in XML
 
 ### Doorbell Camera (DBC2-43536D)
 
@@ -108,7 +109,7 @@ LED Status:
 
 ## Ping Family of Cameras
 
-The newer Vivint cameras use NIPCA, which stands for [Network IP Camera Application.](http://gurau-audibert.hd.free.fr/josdblog/wp-content/uploads/2013/09/CGI_2121.pdf). Some D-Link WiFi cameras also use NIPCA. NIPCA seems to be closed source. The Ping cameras do use some end points that don't seem to be included in the NIPCA standard. Any endpoints discovered that aren't listed in the NIPCA documentation will be documented below
+The newer Vivint cameras use NIPCA, which stands for [Network IP Camera Application](http://gurau-audibert.hd.free.fr/josdblog/wp-content/uploads/2013/09/CGI_2121.pdf). Some D-Link WiFi cameras also use NIPCA. NIPCA seems to be closed source. The Ping cameras do use some end points that don't seem to be included in the NIPCA standard. Any endpoints discovered that aren't listed in the NIPCA documentation will be documented below
 
 ### Vivint Ping
 
@@ -122,9 +123,11 @@ Simply make an HTTP request to the following URL. It should return a 200 code as
 http://(ipaddr)/cgi/admin/telnetd.cgi?command=on
 ```
 
-Next, you can telnet to the device
+Next, you can telnet to the device, using the username/password of `root:admin`
 
-    telnet root:admin
+```
+$ telnet {ip_of_camera}
+```
 
 #### Enabling Web Interface
 
@@ -142,7 +145,7 @@ With root access, you can now enable the web interface to configure the camera.
 # /etc/rc.d/init.d/lighttpd.sh restart
 ```
 
-You should now be able to access the web interface via the IP of the camera, which should prompt you for the username and password, admin:admin
+You should now be able to access the web interface via the IP of the camera, which should prompt you for the username and password, `admin:admin`
 
 
 
