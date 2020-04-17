@@ -101,10 +101,9 @@ The newer Vivint cameras use NIPCA, which stands for [Network IP Camera Applicat
 
 #### Enabling telnet
 
-Simply make an HTTP request to the following URL. It should return a 200 code as well as indicate that telnet is on.
+Simply make an HTTP request to the following URL. It should return a 200 code as well as indicate that telnet is on. Ping cameras use digest auth for their API with a default username/password of `admin:admin`
 
 ```
-Digest auth: admin:admin
 http://(ipaddr)/cgi/admin/telnetd.cgi?command=on
 ```
 
