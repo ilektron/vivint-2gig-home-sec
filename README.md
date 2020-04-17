@@ -99,5 +99,32 @@ The newer Vivint cameras use NIPCA, which stands for [Network IP Camera Applicat
 
 ### Vivint Ping
 
+#### Enabling telnet
 
-:
+Simply make an HTTP request to the following URL. It should return a 200 code as well as indicate that telnet is on.
+
+```
+Digest auth: admin:admin
+http://(ipaddr)/cgi/admin/telnetd.cgi?command=on
+```
+
+Next, you can telnet to the device
+
+    telnet root:admin
+
+#### Enabling Web Interface
+
+With root access, you can now enable the web interface to configure the camera.
+
+1. Enable the web interface in the database via `tdb`
+
+    # tdb set HTTPServer WebAccess2_byte="1"
+
+2. Restart the web server
+
+    # /etc/rc.d/init.d/lighttpd.sh restart
+
+You should now be able to access the web interface via the IP of the camera, which should prompt you for the username and password, admin:admin
+
+
+
