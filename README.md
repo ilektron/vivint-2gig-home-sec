@@ -118,11 +118,15 @@ With root access, you can now enable the web interface to configure the camera.
 
 1. Enable the web interface in the database via `tdb`
 
-    # tdb set HTTPServer WebAccess2_byte="1"
+```
+# tdb set HTTPServer WebAccess2_byte="1"
+```
 
 2. Restart the web server
 
-    # /etc/rc.d/init.d/lighttpd.sh restart
+```
+# /etc/rc.d/init.d/lighttpd.sh restart
+```
 
 You should now be able to access the web interface via the IP of the camera, which should prompt you for the username and password, admin:admin
 
