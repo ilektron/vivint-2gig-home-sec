@@ -29,8 +29,8 @@ rtl_433 also has a script that can be run to generate devices in Home Assistant
 
 
 ### More specific information
-[./devices/vivint/sensors/README.md](Vivint Sensors)
-[./devices/2gig/sensors/README.md](2GIG Sensors)
+[Vivint Sensors](./devices/vivint/sensors/README.md)
+[2GIG Sensors](./devices/2gig/sensors/README.md)
 
 
 # 2GIG Equipment
