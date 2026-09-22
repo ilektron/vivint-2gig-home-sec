@@ -16,7 +16,7 @@ Vivint provides decent hardware that is more often than not locked into their pr
 
 ## Cameras
 
-For more information about the cameras that Vivint uses, go to [./devices/vivint/cameras/README.md](the cameras README)
+For more information about the cameras that Vivint uses, go to [the cameras README](./devices/vivint/cameras/README.md)
 
 
 ## Sensors
