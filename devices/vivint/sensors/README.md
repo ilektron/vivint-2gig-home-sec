@@ -6,28 +6,28 @@ Reverse engineering of the Vivint 345Mhz and 2GIG eSeries sensor protocols to in
 
 
 ### Vivint DW11
-See the [DW11 README.md](./sensors/dw11/README.md)
+See the [DW11 README.md](./dw11/README.md)
 
 ### Vivint DW12
-See the [DW12 README.md](./sensors/dw12/README.md)
+See the [DW12 README.md](./dw12/README.md)
 
 ### Vivint PIR2
-See the [PIR2 README.md](./sensors/pir2/README.md)
+See the [PIR2 README.md](./pir2/README.md)
 
 ### Vivint PIR3
-See the [PIR3 README.md](./sensors/pir3/README.md)
+See the [PIR3 README.md](./pir3/README.md)
 
 ### Vivint GB2
-See the [PIR3 README.md](./sensors/gb2/readme.md)
+See the [PIR3 README.md](./gb2/readme.md)
 
 ### vivint gb3
-see the [gb3 readme.md](./sensors/gb3/README.md)
+see the [gb3 readme.md](./gb3/README.md)
 
 ### Vivint SKEY2
-See the [SKEY2 README.md](./sensors/skey2/README.md)
+See the [SKEY2 README.md](./skey2/README.md)
 
 ### 2GIG KEY2E
-See the [KEY2E README.md](./sensors/key2e/README.md)
+See the [KEY2E README.md](./key2e/README.md)
 
 ## Communication Protocols
 
