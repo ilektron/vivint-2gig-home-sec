@@ -9,6 +9,11 @@ The 2GIG-KEY2-345 is a simple unencrypted keyfob with 4 buttons
 - Disarm
 - Aux
 
+## Hardware
+
+Utilizes the [PIC16F505](https://www.microchip.com/en-us/product/pic16f505)
+
+
 ## Protocol
 
 The fob uses the standard 345MHz 64bit packet that Honeywell devices use.
